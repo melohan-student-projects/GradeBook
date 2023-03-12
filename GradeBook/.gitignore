@@ -80,3 +80,5 @@ bower.json
 *.sw*
 
 config/database.yml
+/app/assets/builds/*
+!/app/assets/builds/.keep
