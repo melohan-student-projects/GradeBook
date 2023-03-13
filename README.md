@@ -42,6 +42,16 @@ bundle install
 bin/rails server
 ```
 
+### Database migration
+
+These instruction allow to drop, create and create tables as defined in `./db/migrate/*`
+
+```shell
+rails db:drop
+rails db:create
+rails db:migrate
+```
+
 ## Branches strategy
 
 Refer to the workflow [GitFlow](https://www.atlassian.com/git/tutorials/comparing-workflows/gitflow-workflow).
