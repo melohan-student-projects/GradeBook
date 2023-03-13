@@ -45,11 +45,13 @@ bin/rails server
 ### Database migration
 
 These instruction allow to drop, create and create tables as defined in `./db/migrate/*`
+Then it will seed database with required data and example.
 
 ```shell
 rails db:drop
 rails db:create
 rails db:migrate
+rails db:seed --trace
 ```
 
 ## Branches strategy
