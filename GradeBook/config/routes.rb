@@ -1,8 +1,22 @@
 Rails.application.routes.draw do
-  devise_for :users
-  get 'home/index'
-  # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
+  devise_for :users, controllers: {
+    sessions: 'users/sessions',
+    registrations: 'users/registrations',
+    passwords: 'users/passwords'
+  }
 
-  # Defines the root path route ("/")
+  devise_scope :user do
+    delete '/users/sign_out' => 'devise/sessions#destroy'
+  end
+
+  get '/login', to: 'users/sessions#new'
+  post '/login', to: 'users/sessions#create'
+  get '/change_password', to: 'users/passwords#edit'
+  patch '/change_password', to: 'users/passwords#update'
+
+  authenticated :user do
+    root to: 'users/home#index', as: :authenticated_root
+  end
+
   root "home#index"
 end

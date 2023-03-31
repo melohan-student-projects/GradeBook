@@ -1,0 +1,8 @@
+<h1>Welcome to your home page!</h1>
+<p>You are logged in as <%= current_user.email %>.</p>
+<h2>Your user information:</h2>
+<ul>
+  <li>Last name: <%= current_user.lastname %></li>
+  <li>First name: <%= current_user.firstname %></li>
+  <li>User type: <%= current_user.user_type.name %></li>
+</ul>
