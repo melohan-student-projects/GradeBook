@@ -70,4 +70,25 @@ Lecture.create!(name: 'POO1', description: 'Introduction to Object-Oriented Prog
 Lecture.create!(name: 'Stage', description: 'Professional internship', category_id: Category.find_by(name: 'Application modules and work experience').id)
 puts "Lectures created successfully!"
 puts "----------------------------------------------------------------------------------------------------------------"
+puts "Creating promotions ..."
 
+# Recherche de l'enseignante Ada Lovelace
+teacher = User.find_by(firstname: "Ada", lastname: "Lovelace")
+
+# Création des promotions
+promotion = Promotion.create!(
+  name: "2019-2021",
+  start_date: Date.parse("23/08/2019"),
+  end_date: Date.parse("1/7/2021"),
+  teacher_id: teacher.id
+)
+
+promotion = Promotion.create!(
+  name: "2020-2022",
+  start_date: Date.parse("23/08/2020"),
+  end_date: Date.parse("1/7/2022"),
+  teacher_id: teacher.id
+)
+
+puts "Promotions created successfully!"
+puts "----------------------------------------------------------------------------------------------------------------"
