@@ -10,11 +10,24 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_04_02_130527) do
+ActiveRecord::Schema[7.0].define(version: 2023_04_02_140842) do
   create_table "categories", charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
     t.string "name", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "dispensed_lectures", charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
+    t.bigint "lecture_id", null: false
+    t.bigint "promotion_id", null: false
+    t.bigint "semester_id", null: false
+    t.bigint "teacher_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["lecture_id"], name: "index_dispensed_lectures_on_lecture_id"
+    t.index ["promotion_id"], name: "index_dispensed_lectures_on_promotion_id"
+    t.index ["semester_id"], name: "index_dispensed_lectures_on_semester_id"
+    t.index ["teacher_id"], name: "index_dispensed_lectures_on_teacher_id"
   end
 
   create_table "lectures", charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
@@ -73,6 +86,10 @@ ActiveRecord::Schema[7.0].define(version: 2023_04_02_130527) do
     t.index ["user_type_id"], name: "index_users_on_user_type_id"
   end
 
+  add_foreign_key "dispensed_lectures", "lectures"
+  add_foreign_key "dispensed_lectures", "promotions"
+  add_foreign_key "dispensed_lectures", "semesters"
+  add_foreign_key "dispensed_lectures", "users", column: "teacher_id"
   add_foreign_key "promotions", "users", column: "teacher_id"
   add_foreign_key "users", "user_types"
 end

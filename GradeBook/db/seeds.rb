@@ -24,7 +24,6 @@ puts "User types created successfully!"
 
 puts "----------------------------------------------------------------------------------------------------------------"
 
-
 puts "Creating users ..."
 
 admin_user_type = UserType.find_by(slug: "admin")
@@ -91,6 +90,8 @@ puts "--------------------------------------------------------------------------
 puts "Creating lectures ..."
 Lecture.create!(name: 'FR', description: 'French language course', category_id: Category.find_by(name: 'General branches').id)
 Lecture.create!(name: 'POO1', description: 'Introduction to Object-Oriented Programming', category_id: Category.find_by(name: 'Specific modules').id)
+Lecture.create!(name: 'POO2', description: 'Introduction to Object-Oriented Programming', category_id: Category.find_by(name: 'Specific modules').id)
+Lecture.create!(name: 'SQL1', description: 'Introduction to MySQL databases', category_id: Category.find_by(name: 'Specific modules').id)
 Lecture.create!(name: 'Stage', description: 'Professional internship', category_id: Category.find_by(name: 'Application modules and work experience').id)
 puts "Lectures created successfully!"
 puts "----------------------------------------------------------------------------------------------------------------"
@@ -148,3 +149,44 @@ UserPromotion.create!(
 
 puts "Students added successfully!"
 puts "--------------------------"
+
+puts "Creating semesters ..."
+
+Semester.create!(name: 'S1')
+Semester.create!(name: 'S2')
+Semester.create!(name: 'S3')
+Semester.create!(name: 'S4')
+
+puts "Semesters created successfully!"
+puts "----------------------------------------------------------------------------------------------------------------"
+
+teacher = User.find_by(firstname: "Ada", lastname: "Lovelace")
+
+promotion = Promotion.find_by(name: "Si-T2a")
+
+lecture = Lecture.find_by(name: "POO1")
+
+semester = Semester.find_by(name: "S1")
+
+DispensedLecture.create!(
+  teacher_id: teacher.id,
+  promotion_id: promotion.id,
+  lecture_id: lecture.id,
+  semester_id: semester.id
+)
+
+# Recherche du cours POO2
+lecture = Lecture.find_by(name: "POO2")
+
+# Recherche du semestre S2
+semester = Semester.find_by(name: "S2")
+
+# Création d'une nouvelle entrée dans la table DispensedLectures
+DispensedLecture.create!(
+  teacher_id: teacher.id,
+  promotion_id: promotion.id,
+  lecture_id: lecture.id,
+  semester_id: semester.id
+)
+
+puts "Dispensed lecture created successfully!"

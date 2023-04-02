@@ -1,9 +1,16 @@
-<h1>Welcome to your home page!</h1>
-<p>You are logged in as <%= current_user.email %>.</p>
-<h2>Your user information:</h2>
-<ul>
-  <li>Last name: <%= current_user.lastname %></li>
-  <li>First name: <%= current_user.firstname %></li>
-  <li>User type: <%= current_user.user_type.name %></li>
-  <li>User type: <%= current_user.user_type.slug %></li>
-</ul>
+<h1>Welcome to GradeBook!</h1>
+<% if current_user.user_type.slug == 'teacher' %>
+  <h2>Your courses:</h2>
+  <ul class="list-disc list-inside">
+    <% current_user.dispensed_lectures.each do |dispensed_lecture| %>
+      <li>
+        <a href="<%= lecture_path(dispensed_lecture.lecture.id) %>"
+           class="text-blue-500 hover:underline">
+          <%= dispensed_lecture.lecture.name %>
+          <%= dispensed_lecture.promotion.name  %>
+          (<%= dispensed_lecture.promotion.start_date.strftime('%Y') + '/' + dispensed_lecture.promotion.end_date.strftime('%Y') %>)
+        </a>
+      </li>
+    <% end %>
+  </ul>
+<% end %>
