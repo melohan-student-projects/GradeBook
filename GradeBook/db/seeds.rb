@@ -1,4 +1,4 @@
-puts "--------------"
+puts "----------------------------------------------------------------------------------------------------------------"
 
 puts "Creating user types..."
 
@@ -22,7 +22,8 @@ UserType.create!(
 
 puts "User types created successfully!"
 
-puts "--------------"
+puts "----------------------------------------------------------------------------------------------------------------"
+
 
 puts "Creating users ..."
 
@@ -53,5 +54,20 @@ User.create!(
   password: "jdoe12345",
   user_type: admin_user_type
 )
+puts "User created successfully!"
 
-puts "Users created successfully!"
+puts "----------------------------------------------------------------------------------------------------------------"
+
+puts "Creating categories ..."
+Category.create!(name: 'General branches')
+Category.create!(name: 'Application modules and work experience')
+Category.create!(name: 'Specific modules')
+puts "Categories created successfully!"
+puts "----------------------------------------------------------------------------------------------------------------"
+puts "Creating lectures ..."
+Lecture.create!(name: 'FR', description: 'French language course', category_id: Category.find_by(name: 'General branches').id)
+Lecture.create!(name: 'POO1', description: 'Introduction to Object-Oriented Programming', category_id: Category.find_by(name: 'Specific modules').id)
+Lecture.create!(name: 'Stage', description: 'Professional internship', category_id: Category.find_by(name: 'Application modules and work experience').id)
+puts "Lectures created successfully!"
+puts "----------------------------------------------------------------------------------------------------------------"
+
