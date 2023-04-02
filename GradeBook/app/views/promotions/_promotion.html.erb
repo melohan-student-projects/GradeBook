@@ -16,7 +16,8 @@
 
   <p class="my-5">
     <strong class="block font-medium mb-1">Teacher:</strong>
-    <%= User.find(@promotion.teacher_id).full_name %>
+    <% teacher = User.find(promotion.teacher_id) %>
+    <%= teacher.full_name %>
   </p>
 
   <% if action_name != "show" %>
