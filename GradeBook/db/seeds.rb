@@ -40,6 +40,30 @@ User.create!(
 )
 
 User.create!(
+  firstname: "Monica",
+  lastname: "Geller",
+  email: "monica.geller@cpnv.ch",
+  password: "mgeller12345",
+  user_type: student_user_type
+)
+
+User.create!(
+  firstname: "Phoebe",
+  lastname: "Buffay",
+  email: "phoebe.buffay@cpnv.ch",
+  password: "pbuffay12345",
+  user_type: student_user_type
+)
+
+User.create!(
+  firstname: "Joey",
+  lastname: "Tribbiani",
+  email: "joey.tribbiani@cpnv.ch",
+  password: "jtribbiani12345",
+  user_type: student_user_type
+)
+
+User.create!(
   firstname: "Ada",
   lastname: "Lovelace",
   email: "ada.lovelace@cpnv.ch",
@@ -77,14 +101,14 @@ teacher = User.find_by(firstname: "Ada", lastname: "Lovelace")
 
 # Création des promotions
 promotion = Promotion.create!(
-  name: "2019-2021",
+  name: "Si-T2a",
   start_date: Date.parse("23/08/2019"),
   end_date: Date.parse("1/7/2021"),
   teacher_id: teacher.id
 )
 
 promotion = Promotion.create!(
-  name: "2020-2022",
+  name: "Si-T2b",
   start_date: Date.parse("23/08/2020"),
   end_date: Date.parse("1/7/2022"),
   teacher_id: teacher.id
@@ -92,3 +116,35 @@ promotion = Promotion.create!(
 
 puts "Promotions created successfully!"
 puts "----------------------------------------------------------------------------------------------------------------"
+puts "Adding students to promotions..."
+
+promotion_1 = Promotion.find_by(start_date: Date.parse("23/08/2019"))
+promotion_2 = Promotion.find_by(start_date: Date.parse("23/08/2020"))
+
+student1 = User.find_by(email: "rachel.green@cpnv.ch")
+student2 = User.find_by(email: "monica.geller@cpnv.ch")
+student3 = User.find_by(email: "phoebe.buffay@cpnv.ch")
+student4 = User.find_by(email: "joey.tribbiani@cpnv.ch")
+
+UserPromotion.create!(
+  promotion_id: promotion_1.id,
+  student_id: student1.id
+)
+
+UserPromotion.create!(
+  promotion_id: promotion_1.id,
+  student_id: student2.id
+)
+
+UserPromotion.create!(
+  promotion_id: promotion_2.id,
+  student_id: student3.id
+)
+
+UserPromotion.create!(
+  promotion_id: promotion_2.id,
+  student_id: student4.id
+)
+
+puts "Students added successfully!"
+puts "--------------------------"
