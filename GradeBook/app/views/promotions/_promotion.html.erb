@@ -1,0 +1,46 @@
+<div id="<%= dom_id promotion %>">
+  <p class="my-5">
+    <strong class="block font-medium mb-1">Name:</strong>
+    <%= promotion.name %>
+  </p>
+
+  <p class="my-5">
+    <strong class="block font-medium mb-1">Start date:</strong>
+    <%= promotion.start_date %>
+  </p>
+
+  <p class="my-5">
+    <strong class="block font-medium mb-1">End date:</strong>
+    <%= promotion.end_date %>
+  </p>
+
+  <p class="my-5">
+    <strong class="block font-medium mb-1">Teacher:</strong>
+    <% teacher = User.find(promotion.user_id) %>
+    <%= teacher.full_name %>
+  </p>
+
+  <p class="mb-4">
+    <strong class="block font-medium mb-0">Students:</strong>
+  <ul class="mt-0">
+    <% if promotion.present? && promotion.users.present? %>
+      <% promotion.users.each do |student| %>
+        <li><%= student.full_name %></li>
+      <% end %>
+    <% else %>
+      <li>No students found.</li>
+    <% end %>
+  </ul>
+  </p>
+  <br>
+  <%= link_to 'Add student', new_user_promotion_path(promotion_id: promotion.id), class: "bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" %>
+  <br>
+  <br>
+
+
+  <% if action_name != "show" %>
+    <%= link_to "Show this promotion", promotion, class: "rounded-lg py-3 px-5 bg-gray-100 inline-block font-medium" %>
+    <%= link_to 'Edit this promotion', edit_promotion_path(promotion), class: "rounded-lg py-3 ml-2 px-5 bg-gray-100 inline-block font-medium" %>
+    <hr class="mt-6">
+  <% end %>
+</div>

@@ -2,6 +2,12 @@
 
 one:
   name: MyString
+  start_date: MyString
+  end_date: MyString
+  teacher_id: MyString
 
 two:
   name: MyString
+  start_date: MyString
+  end_date: MyString
+  teacher_id: MyString

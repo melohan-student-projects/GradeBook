@@ -46,6 +46,7 @@ gem "mysql2"
 
 gem "devise"
 
+gem 'faker'
 # Use Sass to process CSS
 # gem "sassc-rails"
 

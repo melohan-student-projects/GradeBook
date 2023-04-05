@@ -1,5 +1,10 @@
 Rails.application.routes.draw do
+  resources :promotions
+  resources :dispensed_lecture
+  resources :user_promotions
   resources :lectures
+  resources :lectures
+
   devise_for :users, controllers: {
     sessions: 'users/sessions',
     registrations: 'users/registrations',
