@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  resources :user_promotions
+  resources :student_promotions
   resources :promotions
   resources :lectures
   devise_for :users, controllers: {

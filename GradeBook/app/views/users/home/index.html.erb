@@ -1,5 +1,5 @@
 <h1>Welcome to GradeBook!</h1>
-<% if current_user.user_type.slug == 'teacher' %>
+<% if current_user && current_user.user_type.slug == 'TEA' %>
   <h2>Your courses:</h2>
   <ul class="list-disc list-inside">
     <% current_user.dispensed_lectures.each do |dispensed_lecture| %>
@@ -7,8 +7,9 @@
         <a href="<%= lecture_path(dispensed_lecture.lecture.id) %>"
            class="text-blue-500 hover:underline">
           <%= dispensed_lecture.lecture.name %>
-          <%= dispensed_lecture.promotion.name  %>
-          (<%= dispensed_lecture.promotion.start_date.strftime('%Y') + '/' + dispensed_lecture.promotion.end_date.strftime('%Y') %>)
+          <%= dispensed_lecture.promotion.name %>
+          (<%= dispensed_lecture.promotion.start_date.strftime('%Y') + '/' + dispensed_lecture.promotion.end_date.strftime('%Y') %>
+          )
         </a>
       </li>
     <% end %>

@@ -17,7 +17,7 @@ class PromotionsTest < ApplicationSystemTestCase
     fill_in "End date", with: @promotion.end_date
     fill_in "Name", with: @promotion.name
     fill_in "Start date", with: @promotion.start_date
-    fill_in "Teacher", with: @promotion.teacher_id
+    fill_in "Teacher", with: @promotion.user_id
     click_on "Create Promotion"
 
     assert_text "Promotion was successfully created"
@@ -31,7 +31,7 @@ class PromotionsTest < ApplicationSystemTestCase
     fill_in "End date", with: @promotion.end_date
     fill_in "Name", with: @promotion.name
     fill_in "Start date", with: @promotion.start_date
-    fill_in "Teacher", with: @promotion.teacher_id
+    fill_in "Teacher", with: @promotion.user_id
     click_on "Update Promotion"
 
     assert_text "Promotion was successfully updated"

@@ -3,7 +3,7 @@
 
     <div class="md:mt-12 md:w-48 md:fixed md:left-0 md:top-0 content-center md:content-start text-left justify-between bg-gray-800">
       <ul class="list-reset flex flex-row md:flex-col pt-3 md:py-3 px-1 md:px-2 text-center md:text-left">
-        <% if current_user.user_type.slug == 'teacher' || current_user.user_type.slug == 'admin' %>
+        <% if current_user.user_type.slug == 'TEA' || current_user.user_type.slug == 'ADM' %>
           <li class="mr-3 flex-1">
             <%= link_to 'Home', authenticated_root_path, class: "block py-1 md:py-3 pl-0 md:pl-1 align-middle text-white no-underline hover:text-white border-b-2 border-gray-800 hover:border-red-500" %>
           </li>

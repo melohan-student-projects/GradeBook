@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_04_02_140842) do
+ActiveRecord::Schema[7.0].define(version: 2023_04_05_145510) do
   create_table "categories", charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
     t.string "name", null: false
     t.datetime "created_at", null: false
@@ -21,13 +21,13 @@ ActiveRecord::Schema[7.0].define(version: 2023_04_02_140842) do
     t.bigint "lecture_id", null: false
     t.bigint "promotion_id", null: false
     t.bigint "semester_id", null: false
-    t.bigint "teacher_id", null: false
+    t.bigint "user_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["lecture_id"], name: "index_dispensed_lectures_on_lecture_id"
     t.index ["promotion_id"], name: "index_dispensed_lectures_on_promotion_id"
     t.index ["semester_id"], name: "index_dispensed_lectures_on_semester_id"
-    t.index ["teacher_id"], name: "index_dispensed_lectures_on_teacher_id"
+    t.index ["user_id"], name: "index_dispensed_lectures_on_user_id"
   end
 
   create_table "lectures", charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
@@ -42,10 +42,10 @@ ActiveRecord::Schema[7.0].define(version: 2023_04_02_140842) do
     t.string "name", limit: 60, null: false
     t.date "start_date", null: false
     t.date "end_date", null: false
-    t.bigint "teacher_id", null: false
+    t.bigint "user_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["teacher_id"], name: "index_promotions_on_teacher_id"
+    t.index ["user_id"], name: "index_promotions_on_user_id"
   end
 
   create_table "semesters", charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
@@ -56,14 +56,15 @@ ActiveRecord::Schema[7.0].define(version: 2023_04_02_140842) do
 
   create_table "user_promotions", charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
     t.integer "promotion_id", null: false
-    t.integer "student_id", null: false
+    t.string "user_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["promotion_id", "user_id"], name: "index_user_promotions_on_promotion_id_and_user_id", unique: true
   end
 
   create_table "user_types", charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
     t.string "name", limit: 60, null: false
-    t.string "slug", limit: 10, null: false
+    t.string "slug", limit: 3, null: false
     t.string "description", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -89,7 +90,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_04_02_140842) do
   add_foreign_key "dispensed_lectures", "lectures"
   add_foreign_key "dispensed_lectures", "promotions"
   add_foreign_key "dispensed_lectures", "semesters"
-  add_foreign_key "dispensed_lectures", "users", column: "teacher_id"
-  add_foreign_key "promotions", "users", column: "teacher_id"
+  add_foreign_key "dispensed_lectures", "users"
+  add_foreign_key "promotions", "users"
   add_foreign_key "users", "user_types"
 end

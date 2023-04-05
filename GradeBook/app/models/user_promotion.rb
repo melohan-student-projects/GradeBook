@@ -1,7 +1,6 @@
 class UserPromotion < ApplicationRecord
   belongs_to :promotion
-  belongs_to :student, class_name: "User"
-
-  validates :promotion_id, presence: true
-  validates :student_id, presence: true
+  has_many :users, through: :user_promotions
+  delegate :name, to: :promotion, prefix: true
+  delegate :full_name, to: :user, prefix: true
 end
