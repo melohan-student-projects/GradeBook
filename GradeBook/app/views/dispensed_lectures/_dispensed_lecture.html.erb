@@ -1,0 +1,27 @@
+<div id="<%= dom_id dispensed_lecture %>">
+  <p class="my-5">
+    <strong class="block font-medium mb-1">Lecture:</strong>
+    <%= dispensed_lecture.lecture_id %>
+  </p>
+
+  <p class="my-5">
+    <strong class="block font-medium mb-1">Promotion:</strong>
+    <%= dispensed_lecture.promotion_id %>
+  </p>
+
+  <p class="my-5">
+    <strong class="block font-medium mb-1">Semester:</strong>
+    <%= dispensed_lecture.semester_id %>
+  </p>
+
+  <p class="my-5">
+    <strong class="block font-medium mb-1">User:</strong>
+    <%= dispensed_lecture.user_id %>
+  </p>
+
+  <% if action_name != "show" %>
+    <%= link_to "Show this dispensed lecture", dispensed_lecture, class: "rounded-lg py-3 px-5 bg-gray-100 inline-block font-medium" %>
+    <%= link_to 'Edit this dispensed lecture', edit_dispensed_lecture_path(dispensed_lecture), class: "rounded-lg py-3 ml-2 px-5 bg-gray-100 inline-block font-medium" %>
+    <hr class="mt-6">
+  <% end %>
+</div>

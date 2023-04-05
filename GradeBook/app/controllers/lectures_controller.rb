@@ -73,7 +73,7 @@ class LecturesController < ApplicationController
 
   def require_teacher_or_admin
     if current_user.user_type.slug != 'TEA' && current_user.user_type.slug != 'ADM'
-      redirect_to root_path, alert: "Vous n'êtes pas autorisé à accéder aux lectures."
+      redirect_to root_path, alert: "You're not allowed to access to this content."
     end
   end
 end

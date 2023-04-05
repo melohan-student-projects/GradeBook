@@ -5,8 +5,13 @@
 
   <div class="flex justify-between items-center">
     <h1 class="font-bold text-4xl">Promotions</h1>
-    <%= link_to 'New promotion', new_promotion_path, class: "rounded-lg py-3 px-5 bg-blue-600 text-white block font-medium" %>
   </div>
+
+  <div class="flex justify-between items-center">
+    <%= link_to 'New promotion', new_promotion_path, class: "rounded-lg py-3 px-5 bg-blue-600 text-white block font-medium" %>
+    <%= link_to 'Add student to a promotion', new_user_promotion_path, class: "rounded-lg py-3 px-5 bg-blue-600 text-white block font-medium" %>
+  </div>
+
 
   <div id="promotions" class="min-w-full">
     <%= render @promotions %>

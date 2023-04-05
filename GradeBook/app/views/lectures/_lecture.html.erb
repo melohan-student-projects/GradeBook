@@ -14,6 +14,19 @@
     <%= lecture.category_name %>
   </p>
 
+  <p class="mb-4">
+    <strong class="block font-medium mb-0">Students:</strong>
+  <ul class="mt-0">
+    <% if lecture.present? && lecture.promotions.present? %>
+      <% lecture.promotions.each do |promotion| %>
+        <li> <%= "#{promotion.name} (#{promotion.start_date.strftime('%Y')}-#{promotion.end_date.strftime('%Y')})" %></li>
+      <% end %>
+    <% else %>
+      <li>No promotion found.</li>
+    <% end %>
+  </ul>
+  </p>
+
   <% if action_name != "show" %>
     <%= link_to "Show this lecture", lecture, class: "rounded-lg py-3 px-5 bg-gray-100 inline-block font-medium" %>
     <%= link_to 'Edit this lecture', edit_lecture_path(lecture), class: "rounded-lg py-3 ml-2 px-5 bg-gray-100 inline-block font-medium" %>
