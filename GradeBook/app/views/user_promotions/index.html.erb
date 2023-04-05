@@ -4,8 +4,15 @@
   <% end %>
 
   <div class="flex justify-between items-center">
-    <h1 class="font-bold text-4xl">User promotions</h1>
+    <h1 class="font-bold text-4xl">Student promotions</h1>
     <%= link_to 'New user promotion', new_user_promotion_path, class: "rounded-lg py-3 px-5 bg-blue-600 text-white block font-medium" %>
+    <% @user_promotions.each do |user_promotion| %>
+      <%= render user_promotion %>
+      <p>
+        <%= link_to "Show this user promotion", user_promotion %>
+      </p>
+    <% end %>
+
   </div>
 
   <div id="user_promotions" class="min-w-full">

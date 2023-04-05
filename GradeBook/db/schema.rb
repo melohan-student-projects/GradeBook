@@ -55,11 +55,13 @@ ActiveRecord::Schema[7.0].define(version: 2023_04_05_145510) do
   end
 
   create_table "user_promotions", charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
-    t.integer "promotion_id", null: false
-    t.string "user_id", null: false
+    t.bigint "promotion_id", null: false
+    t.bigint "user_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["promotion_id", "user_id"], name: "index_user_promotions_on_promotion_id_and_user_id", unique: true
+    t.index ["promotion_id"], name: "index_user_promotions_on_promotion_id"
+    t.index ["user_id"], name: "index_user_promotions_on_user_id"
   end
 
   create_table "user_types", charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
@@ -92,5 +94,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_04_05_145510) do
   add_foreign_key "dispensed_lectures", "semesters"
   add_foreign_key "dispensed_lectures", "users"
   add_foreign_key "promotions", "users"
+  add_foreign_key "user_promotions", "promotions"
+  add_foreign_key "user_promotions", "users"
   add_foreign_key "users", "user_types"
 end

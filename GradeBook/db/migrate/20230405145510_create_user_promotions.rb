@@ -1,8 +1,8 @@
 class CreateUserPromotions < ActiveRecord::Migration[7.0]
   def change
     create_table :user_promotions do |t|
-      t.integer :promotion_id, null: false
-      t.string :user_id, null: false
+      t.references :promotion, null: false, foreign_key: true
+      t.references :user, null: false, foreign_key: true
 
       t.timestamps
 

@@ -106,9 +106,10 @@ UserPromotion.create!(
 )
 
 puts "Students added successfully!"
-puts "--------------------------"
 
 puts "Creating semesters ..."
+puts "----------------------------------------------------------------------------------------------------------------"
+
 
 Semester.create!(name: 'S1')
 Semester.create!(name: 'S2')

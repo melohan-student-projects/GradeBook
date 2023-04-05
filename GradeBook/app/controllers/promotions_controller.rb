@@ -9,6 +9,7 @@ class PromotionsController < ApplicationController
 
   # GET /promotions/1 or /promotions/1.json
   def show
+    @promotion = Promotion.find(params[:id])
   end
 
   # GET /promotions/new

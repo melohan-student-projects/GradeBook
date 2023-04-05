@@ -1,31 +1,37 @@
 class UserPromotionsController < ApplicationController
+  before_action :authenticate_user!
   before_action :set_user_promotion, only: %i[ show edit update destroy ]
 
-  # GET /user_promotions or /user_promotions.json
   def index
-    @user_promotions = UserPromotion.all
+    redirect_to '/promotions'
   end
 
-  # GET /user_promotions/1 or /user_promotions/1.json
   def show
+    redirect_to '/promotions'
   end
 
-  # GET /user_promotions/new
   def new
-    @user_promotion = UserPromotion.new
+    if current_user.teacher?
+      @user_promotion = UserPromotion.new
+    else
+      redirect_to '/promotions'
+    end
   end
 
-  # GET /user_promotions/1/edit
   def edit
+    if current_user.teacher?
+      @user_promotion = UserPromotion.find(params[:id])
+    else
+      redirect_to '/promotions'
+    end
   end
 
-  # POST /user_promotions or /user_promotions.json
   def create
     @user_promotion = UserPromotion.new(user_promotion_params)
 
     respond_to do |format|
       if @user_promotion.save
-        format.html { redirect_to user_promotion_url(@user_promotion), notice: "User promotion was successfully created." }
+        format.html { redirect_to user_promotion_url(@user_promotion), notice: "user promotion was successfully created." }
         format.json { render :show, status: :created, location: @user_promotion }
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -34,11 +40,10 @@ class UserPromotionsController < ApplicationController
     end
   end
 
-  # PATCH/PUT /user_promotions/1 or /user_promotions/1.json
   def update
     respond_to do |format|
       if @user_promotion.update(user_promotion_params)
-        format.html { redirect_to user_promotion_url(@user_promotion), notice: "User promotion was successfully updated." }
+        format.html { redirect_to user_promotion_url(@user_promotion), notice: "user promotion was successfully updated." }
         format.json { render :show, status: :ok, location: @user_promotion }
       else
         format.html { render :edit, status: :unprocessable_entity }
@@ -47,24 +52,23 @@ class UserPromotionsController < ApplicationController
     end
   end
 
-  # DELETE /user_promotions/1 or /user_promotions/1.json
   def destroy
     @user_promotion.destroy
 
     respond_to do |format|
-      format.html { redirect_to user_promotions_url, notice: "User promotion was successfully destroyed." }
+      format.html { redirect_to user_promotions_url, notice: "user promotion was successfully destroyed." }
       format.json { head :no_content }
     end
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_user_promotion
-      @user_promotion = UserPromotion.find(params[:id])
-    end
 
-    # Only allow a list of trusted parameters through.
-    def user_promotion_params
-      params.require(:user_promotion).permit(:promotion_id, :user_id)
-    end
+  def set_user_promotion
+    @user_promotion = UserPromotion.find(params[:id])
+  end
+
+  def user_promotion_params
+    params.require(:user_promotion).permit(:promotion_id, :user_id)
+  end
+
 end
