@@ -1,0 +1,37 @@
+<h2>Your grades:</h2>
+<div class="relative overflow-x-auto shadow-md sm:rounded-lg">
+  <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
+    <thead class="text-xs text-white uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+    <tr>
+      <th scope="col" class="px-6 py-3">Grade name</th>
+      <th scope="col" class="px-6 py-3">Grade</th>
+      <th scope="col" class="px-6 py-3">Lecture</th>
+      <th scope="col" class="px-6 py-3">Semester</th>
+    </tr>
+    </thead>
+    <tbody>
+    <% if current_user.grades.any? %>
+      <% current_user.grades.each do |grade| %>
+        <tr class="border-b bg-gray-50 dark:bg-gray-800 dark:border-gray-700">
+          <td class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">
+            <%= grade.name %>
+          </td>
+          <td class="px-6 py-4">
+            <%= grade.result %> (<%= grade.weight %>)
+          </td>
+          <td class="px-6 py-4">
+            <%= grade.dispensed_lecture.lecture.name %>
+          </td>
+          <td class="px-6 py-4">
+            <%= grade.dispensed_lecture.semester.name %>
+          </td>
+        </tr>
+      <% end %>
+    <% else %>
+      <tr>
+        <td colspan="4" class="px-6 py-4">No grades found.</td>
+      </tr>
+    <% end %>
+    </tbody>
+  </table>
+</div>

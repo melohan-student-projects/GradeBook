@@ -1,0 +1,48 @@
+<div id="<%= dom_id grade %>">
+  <p class="my-5">
+    <strong class="block font-medium mb-1">Name:</strong>
+    <%= grade.name %>
+  </p>
+
+  <p class="my-5">
+    <strong class="block font-medium mb-1">Result:</strong>
+    <%= grade.result %>
+  </p>
+
+  <p class="my-5">
+    <strong class="block font-medium mb-1">Weight:</strong>
+    <%= grade.weight %>
+  </p>
+
+  <p class="my-5">
+    <strong class="block font-medium mb-1">Date:</strong>
+    <%= grade.date %>
+  </p>
+
+  <p class="my-5">
+    <strong class="block font-medium mb-1">Student id:</strong>
+    <%= grade.student_id %>
+  </p>
+
+  <p class="my-5">
+    <strong class="block font-medium mb-1">Teacher id:</strong>
+    <%= grade.teacher_id %>
+  </p>
+
+  <p class="my-5">
+    <strong class="block font-medium mb-1">Dispensed lecture:</strong>
+    [<%= grade.dispensed_lecture.lecture.name %>] <%= grade.name %>
+  </p>
+
+  <p class="my-5">
+    <strong class="block font-medium mb-1">Promotion: </strong>
+    <%= grade.dispensed_lecture.promotion.name %> (<%= grade.dispensed_lecture.promotion.start_date.strftime('%Y') %>
+    - <%= grade.dispensed_lecture.promotion.end_date.strftime('%Y') %>)
+  </p>
+
+  <% if action_name != "show" %>
+    <%= link_to "Show this grade", grade, class: "rounded-lg py-3 px-5 bg-gray-100 inline-block font-medium" %>
+    <%= link_to 'Edit this grade', edit_grade_path(grade), class: "rounded-lg py-3 ml-2 px-5 bg-gray-100 inline-block font-medium" %>
+    <hr class="mt-6">
+  <% end %>
+</div>

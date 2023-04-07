@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_04_05_213244) do
+ActiveRecord::Schema[7.0].define(version: 2023_04_07_141930) do
   create_table "categories", charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
     t.string "name", null: false
     t.datetime "created_at", null: false
@@ -28,6 +28,21 @@ ActiveRecord::Schema[7.0].define(version: 2023_04_05_213244) do
     t.index ["promotion_id"], name: "index_dispensed_lectures_on_promotion_id"
     t.index ["semester_id"], name: "index_dispensed_lectures_on_semester_id"
     t.index ["user_id"], name: "index_dispensed_lectures_on_user_id"
+  end
+
+  create_table "grades", charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
+    t.string "name"
+    t.decimal "result", precision: 2, scale: 1, null: false
+    t.decimal "weight", precision: 3, scale: 1, null: false
+    t.date "date", null: false
+    t.bigint "student_id", null: false
+    t.bigint "teacher_id", null: false
+    t.bigint "dispensed_lecture_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["dispensed_lecture_id"], name: "index_grades_on_dispensed_lecture_id"
+    t.index ["student_id"], name: "index_grades_on_student_id"
+    t.index ["teacher_id"], name: "index_grades_on_teacher_id"
   end
 
   create_table "lectures", charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
@@ -93,6 +108,9 @@ ActiveRecord::Schema[7.0].define(version: 2023_04_05_213244) do
   add_foreign_key "dispensed_lectures", "promotions"
   add_foreign_key "dispensed_lectures", "semesters"
   add_foreign_key "dispensed_lectures", "users"
+  add_foreign_key "grades", "dispensed_lectures"
+  add_foreign_key "grades", "users", column: "student_id"
+  add_foreign_key "grades", "users", column: "teacher_id"
   add_foreign_key "promotions", "users"
   add_foreign_key "user_promotions", "promotions"
   add_foreign_key "user_promotions", "users"

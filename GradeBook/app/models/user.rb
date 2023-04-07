@@ -21,9 +21,15 @@ class User < ApplicationRecord
     user_type.slug == role
   end
 
+  def grades
+    Grade.where(student_id: self.id)
+  end
+
   belongs_to :user_type
   has_many :user_promotions
   has_many :promotions, through: :user_promotions
   has_many :users, through: :user_promotions
   has_many :dispensed_lectures
+  has_many :grades_given, foreign_key: :teacher_id, class_name: 'Grade'
+  has_many :grades_received, foreign_key: :student_id, class_name: 'Grade'
 end

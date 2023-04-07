@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :grades
   resources :dispensed_lectures
   resources :promotions
   resources :dispensed_lecture

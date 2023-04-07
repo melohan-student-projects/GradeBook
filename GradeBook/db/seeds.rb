@@ -121,6 +121,8 @@ Semester.create!(name: 'S4')
 puts "Semesters created successfully!"
 puts "----------------------------------------------------------------------------------------------------------------"
 
+puts "Creating dispensed lecture ..."
+
 promotion = Promotion.find_by(name: "Si-T2a")
 
 lecture = Lecture.find_by(name: "POO1")
@@ -149,3 +151,26 @@ DispensedLecture.create!(
 )
 
 puts "Dispensed lecture created successfully!"
+puts "----------------------------------------------------------------------------------------------------------------"
+
+puts "Creating grades ..."
+
+puts "Creating grades ..."
+
+teacher = User.find_by(email: "ada.lovelace@cpnv.ch")
+student = User.find_by(email: "rachel.green@cpnv.ch")
+dispensed_lecture = DispensedLecture.find_by(lecture_id: Lecture.find_by(name: "POO1").id, promotion_id: Promotion.find_by(name: "Si-T2a").id)
+
+10.times do
+  Grade.create!(
+    name: "TE - #{Faker::Lorem.word}",
+    result: rand(1.0..6.0),
+    weight: rand(0.1..1.0),
+    date: Date.today,
+    student: student,
+    teacher: teacher,
+    dispensed_lecture: dispensed_lecture
+  )
+end
+
+puts "Grades created successfully!"
