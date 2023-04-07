@@ -1,7 +1,13 @@
 class DispensedLecturesController < ApplicationController
   before_action :authenticate_user!
   before_action :set_dispensed_lecture, only: %i[ show edit update destroy ]
-  before_action :require_teacher_or_admin, only: [:index, :show, :new, :edit, :create, :update, :destroy]
+  before_action :require_teacher, only: [:index, :show, :new, :edit, :create, :update, :destroy]
+
+  def require_teacher
+    if not current_user.teacher?
+      redirect_to root_path, alert: "You're not allowed to access to this content."
+    end
+  end
 
   # GET /dispensed_lectures or /dispensed_lectures.json
   def index
@@ -72,9 +78,9 @@ class DispensedLecturesController < ApplicationController
       params.require(:dispensed_lecture).permit(:lecture_id, :promotion_id, :semester_id, :user_id)
     end
 
-  def require_teacher_or_admin
-    if current_user.user_type.slug != 'TEA' && current_user.user_type.slug != 'ADM'
-      redirect_to root_path, alert: "You're not alowed to access to this content."
+  def require_teacher
+    if not current_user.teacher?
+      redirect_to root_path, alert: "You're not allowed to access to this content."
     end
   end
 

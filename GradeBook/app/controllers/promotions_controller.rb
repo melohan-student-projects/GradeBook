@@ -1,6 +1,7 @@
 class PromotionsController < ApplicationController
   before_action :authenticate_user!
   before_action :set_promotion, only: %i[ show edit update destroy ]
+  before_action :require_teacher, only: [:index, :show, :new, :edit, :create, :update, :destroy]
 
   # GET /promotions or /promotions.json
   def index
@@ -60,13 +61,20 @@ class PromotionsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_promotion
-      @promotion = Promotion.find(params[:id])
-    end
 
-    # Only allow a list of trusted parameters through.
-    def promotion_params
-      params.require(:promotion).permit(:name, :start_date, :end_date, :user_id)
+  # Use callbacks to share common setup or constraints between actions.
+  def set_promotion
+    @promotion = Promotion.find(params[:id])
+  end
+
+  # Only allow a list of trusted parameters through.
+  def promotion_params
+    params.require(:promotion).permit(:name, :start_date, :end_date, :user_id)
+  end
+
+  def require_teacher
+    if not current_user.teacher?
+      redirect_to root_path, alert: "You're not allowed to access to this content."
     end
+  end
 end

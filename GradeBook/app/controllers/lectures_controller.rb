@@ -1,7 +1,7 @@
 class LecturesController < ApplicationController
   before_action :authenticate_user!
   before_action :set_lecture, only: %i[ show edit update destroy ]
-  before_action :require_teacher_or_admin, only: [:index, :show, :new, :edit, :create, :update, :destroy]
+  before_action :require_teacher, only: [:index, :show, :new, :edit, :create, :update, :destroy]
 
 
   # GET /lectures or /lectures.json
@@ -71,8 +71,8 @@ class LecturesController < ApplicationController
       params.require(:lecture).permit(:name, :description, :category_id)
     end
 
-  def require_teacher_or_admin
-    if current_user.user_type.slug != 'TEA' && current_user.user_type.slug != 'ADM'
+  def require_teacher
+    if not current_user.teacher?
       redirect_to root_path, alert: "You're not allowed to access to this content."
     end
   end

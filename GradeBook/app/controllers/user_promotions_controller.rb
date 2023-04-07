@@ -1,6 +1,7 @@
 class UserPromotionsController < ApplicationController
   before_action :authenticate_user!
   before_action :set_user_promotion, only: %i[ show edit update destroy ]
+  before_action :require_teacher, only: [:index, :show, :new, :edit, :create, :update, :destroy]
 
   def index
     redirect_to '/promotions'
@@ -11,19 +12,11 @@ class UserPromotionsController < ApplicationController
   end
 
   def new
-    if current_user.teacher?
-      @user_promotion = UserPromotion.new
-    else
-      redirect_to '/promotions'
-    end
+    @user_promotion = UserPromotion.new
   end
 
   def edit
-    if current_user.teacher?
-      @user_promotion = UserPromotion.find(params[:id])
-    else
-      redirect_to '/promotions'
-    end
+    @user_promotion = UserPromotion.find(params[:id])
   end
 
   def create
@@ -71,4 +64,9 @@ class UserPromotionsController < ApplicationController
     params.require(:user_promotion).permit(:promotion_id, :user_id)
   end
 
+  def require_teacher
+    if not current_user.teacher?
+      redirect_to root_path, alert: "You're not allowed to access to this content."
+    end
+  end
 end

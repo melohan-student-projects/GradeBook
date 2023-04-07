@@ -5,12 +5,6 @@ puts "--------------------------------------------------------------------------
 puts "Creating user types..."
 
 UserType.create!(
-  name: "Administrator",
-  slug: "ADM",
-  description: "Admin users can perform all actions within the system."
-)
-
-UserType.create!(
   name: "Teacher",
   slug: "TEA",
   description: "Teacher users can view and manage their student records."
@@ -28,7 +22,6 @@ puts "--------------------------------------------------------------------------
 
 puts "Creating users ..."
 
-admin_user_type = UserType.find_by(slug: "ADM")
 teacher_user_type = UserType.find_by(slug: "TEA")
 student_user_type = UserType.find_by(slug: "STU")
 

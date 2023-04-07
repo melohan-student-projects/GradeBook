@@ -1,5 +1,7 @@
 class GradesController < ApplicationController
   before_action :set_grade, only: %i[ show edit update destroy ]
+  before_action :authenticate_user!
+  before_action :require_teacher, only: [:index, :show, :new, :edit, :create, :update, :destroy]
 
   # GET /grades or /grades.json
   def index
@@ -58,13 +60,21 @@ class GradesController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_grade
-      @grade = Grade.find(params[:id])
-    end
 
-    # Only allow a list of trusted parameters through.
-    def grade_params
-      params.require(:grade).permit(:name, :result, :weight, :date, :student_id, :teacher_id, :dispensed_lecture_id)
+  # Use callbacks to share common setup or constraints between actions.
+  def set_grade
+    @grade = Grade.find(params[:id])
+  end
+
+  # Only allow a list of trusted parameters through.
+  def grade_params
+    params.require(:grade).permit(:name, :result, :weight, :date, :student_id, :teacher_id, :dispensed_lecture_id)
+  end
+
+  def require_teacher
+    if not current_user.teacher?
+      redirect_to root_path, alert: "You're not allowed to access to this content."
     end
+  end
+
 end
