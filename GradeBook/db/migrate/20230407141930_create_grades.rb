@@ -1,7 +1,7 @@
 class CreateGrades < ActiveRecord::Migration[7.0]
   def change
     create_table :grades do |t|
-      t.string :name
+      t.string :name, limit: 120
       t.decimal :result, precision: 2, scale: 1, null: false
       t.decimal :weight, precision: 3, scale: 1, null: false
       t.date :date, null: false

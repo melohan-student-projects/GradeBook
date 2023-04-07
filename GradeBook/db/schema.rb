@@ -12,7 +12,7 @@
 
 ActiveRecord::Schema[7.0].define(version: 2023_04_07_141930) do
   create_table "categories", charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
-    t.string "name", null: false
+    t.string "name", limit: 100, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -31,7 +31,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_04_07_141930) do
   end
 
   create_table "grades", charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
-    t.string "name"
+    t.string "name", limit: 120
     t.decimal "result", precision: 2, scale: 1, null: false
     t.decimal "weight", precision: 3, scale: 1, null: false
     t.date "date", null: false
@@ -46,11 +46,12 @@ ActiveRecord::Schema[7.0].define(version: 2023_04_07_141930) do
   end
 
   create_table "lectures", charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
-    t.string "name", limit: 5, null: false
+    t.string "name", limit: 60, null: false
     t.string "description"
-    t.integer "category_id"
+    t.bigint "category_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["category_id"], name: "index_lectures_on_category_id"
   end
 
   create_table "promotions", charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
@@ -64,7 +65,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_04_07_141930) do
   end
 
   create_table "semesters", charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
-    t.string "name", limit: 60, null: false
+    t.string "name", limit: 2, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -111,6 +112,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_04_07_141930) do
   add_foreign_key "grades", "dispensed_lectures"
   add_foreign_key "grades", "users", column: "student_id"
   add_foreign_key "grades", "users", column: "teacher_id"
+  add_foreign_key "lectures", "categories"
   add_foreign_key "promotions", "users"
   add_foreign_key "user_promotions", "promotions"
   add_foreign_key "user_promotions", "users"
