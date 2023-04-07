@@ -49,10 +49,12 @@ User.create!(
 )
 
 10.times do
+  first_name = Faker::Name.first_name;
+  last_name = Faker::Name.last_name;
   User.create!(
-    firstname: Faker::Name.first_name,
-    lastname: Faker::Name.last_name,
-    email: "#{Faker::Name.first_name}.#{Faker::Name.last_name}@cpnv.ch",
+    firstname: first_name,
+    lastname: last_name,
+    email: "#{first_name}.#{last_name}@cpnv.ch",
     password: "password",
     user_type: student_user_type
   )
