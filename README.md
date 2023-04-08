@@ -7,7 +7,8 @@
 
 # GradeBook
 
-The aim of this project is to provide a web-based application that allows teachers to assign grades to students in their classes and to allow these students to consult their report cards.
+The aim of this project is to provide a web-based application that allows teachers to assign grades to students in their
+classes and to allow these students to consult their report cards.
 
 ## Setting up dev
 
@@ -17,7 +18,7 @@ The aim of this project is to provide a web-based application that allows teache
 - Ruby 3.0.4
 - MariaDB 10.6.12
 
-### Clone the repository
+### 1. Clone the repository
 
 ```shell
 git clone git@github.com:melohan/GradeBook.git
@@ -25,33 +26,41 @@ cd GradeBook
 git switch develop
 ```
 
-### Configurations
+### 2. Configurations
 
 1. Copy and rename `/GradeBook/config/example.database.yml` to `/GradeBook/config/database.yml`
 2. Set your databases, database user and password.
 
-### Run the project
+### 3. Install dependencies
 
-1. Go to the RoR project directory and install dependencies
+Go to the RoR project directory and install dependencies
+
 ```shell
 cd GradeBook
 bundle install
 ```
-2 . Run the project
-```shell
-bin/rails server
-```
 
-### Database migration
+### 4. Run migrations
 
 These instruction allow to drop, create and create tables as defined in `./db/migrate/*`
 Then it will seed database with required data and example.
 
+if the database already exists:
 ```shell
 rails db:drop
+```
+
+Create, migrate and seed db:
+```shell
 rails db:create
 rails db:migrate
 rails db:seed --trace
+```
+
+### 5. Run project
+
+```shell
+bin/rails server
 ```
 
 ## Branches strategy
@@ -59,21 +68,23 @@ rails db:seed --trace
 Refer to the workflow [GitFlow](https://www.atlassian.com/git/tutorials/comparing-workflows/gitflow-workflow).
 
 GitFlow installation:
+
 - [Windows](https://git-scm.com/download/win)
 - [Linux/Ubuntu](https://howtoinstall.co/en/git-flow)
 
 Main branches description:
 
-| Branches  | Description |
-|---|---|
-| main/ | stores the official release history  |
-| develop/ | serves as an integration branch for features |
-| feature/| fork of `develop/` for a new feature|
-|release/|fork of `develop/`, once the release is ready, it should be merge to `main`|
+| Branches | Description                                                                 |
+|----------|-----------------------------------------------------------------------------|
+| main/    | stores the official release history                                         |
+| develop/ | serves as an integration branch for features                                |
+| feature/ | fork of `develop/` for a new feature                                        |
+| release/ | fork of `develop/`, once the release is ready, it should be merge to `main` |
 
 ## Contributing
 
-If you have a suggestion that would make this better, please fork the repo and create a pull request. You can also simply open an issue with the tag "enhancement". Don't forget to give the project a star! Thanks again!
+If you have a suggestion that would make this better, please fork the repo and create a pull request. You can also
+simply open an issue with the tag "enhancement". Don't forget to give the project a star! Thanks again!
 
 1. Fork the Project
 2. Create your Feature Branch (git checkout -b feature/amazing_feature)
