@@ -42,6 +42,7 @@
 
   <% if action_name != "show" %>
     <%= link_to "Show this grade", grade, class: "rounded-lg py-3 px-5 bg-gray-100 inline-block font-medium" %>
+  <% elsif action_name != "show" && current_user.teacher? %>
     <%= link_to 'Edit this grade', edit_grade_path(grade), class: "rounded-lg py-3 ml-2 px-5 bg-gray-100 inline-block font-medium" %>
     <hr class="mt-6">
   <% end %>

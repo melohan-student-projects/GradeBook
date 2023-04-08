@@ -3,11 +3,6 @@ class DispensedLecturesController < ApplicationController
   before_action :set_dispensed_lecture, only: %i[ show edit update destroy ]
   before_action :require_teacher, only: [:index, :show, :new, :edit, :create, :update, :destroy]
 
-  def require_teacher
-    if not current_user.teacher?
-      redirect_to root_path, alert: "You're not allowed to access to this content."
-    end
-  end
 
   # GET /dispensed_lectures or /dispensed_lectures.json
   def index

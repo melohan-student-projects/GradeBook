@@ -1,11 +1,15 @@
 class GradesController < ApplicationController
   before_action :set_grade, only: %i[ show edit update destroy ]
   before_action :authenticate_user!
-  before_action :require_teacher, only: [:index, :show, :new, :edit, :create, :update, :destroy]
+  before_action :require_teacher, only: [:new, :edit, :create, :update, :destroy]
 
   # GET /grades or /grades.json
   def index
-    @grades = Grade.all
+    if current_user.student?
+      @grades = Grade.where(student_id: current_user.id)
+    elsif current_user.teacher?
+      @grades = Grade.all
+    end
   end
 
   # GET /grades/1 or /grades/1.json

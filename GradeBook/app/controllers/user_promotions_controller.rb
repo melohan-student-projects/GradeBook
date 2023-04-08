@@ -3,22 +3,27 @@ class UserPromotionsController < ApplicationController
   before_action :set_user_promotion, only: %i[ show edit update destroy ]
   before_action :require_teacher, only: [:index, :show, :new, :edit, :create, :update, :destroy]
 
+  # GET /user_promotions or /user_promotions.json
   def index
     redirect_to '/promotions'
   end
 
+  # GET /user_promotions/1 or /user_promotions/1.json
   def show
     redirect_to '/promotions'
   end
 
+  # GET /user_promotions/new
   def new
     @user_promotion = UserPromotion.new
   end
-
+  
+  # GET /user_promotions/1/edit
   def edit
     @user_promotion = UserPromotion.find(params[:id])
   end
-
+  
+  # POST /user_promotions or /user_promotions.json
   def create
     @user_promotion = UserPromotion.new(user_promotion_params)
 
@@ -33,6 +38,7 @@ class UserPromotionsController < ApplicationController
     end
   end
 
+  # PATCH/PUT /user_promotions/1 or /user_promotions/1.json
   def update
     respond_to do |format|
       if @user_promotion.update(user_promotion_params)
@@ -44,7 +50,8 @@ class UserPromotionsController < ApplicationController
       end
     end
   end
-
+  
+  # DELETE /user_promotions/1 or /user_promotions/1.json
   def destroy
     @user_promotion.destroy
 

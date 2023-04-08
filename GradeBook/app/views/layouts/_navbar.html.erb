@@ -23,8 +23,12 @@
               </svg>
             </button>
             <div id="myDropdown" class="dropdownlist absolute bg-gray-800 text-white right-0 mt-3 p-3 overflow-auto z-30 invisible">
-              <div class="border border-gray-800"></div>
-              <%= button_to "Sign out", destroy_user_session_path, method: :delete %>
+              <div class="border border-gray-800">
+                <%= link_to "Edit Profile", edit_user_registration_path %>
+              </div>
+              <div class="border border-gray-800">
+                <%= button_to "Sign out", destroy_user_session_path, method: :delete %>
+              </div>
             </div>
           </div>
         </li>

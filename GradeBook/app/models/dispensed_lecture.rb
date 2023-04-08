@@ -6,4 +6,10 @@ class DispensedLecture < ApplicationRecord
   has_many :grades
 
   delegate :name, to: :lecture, prefix: true
+
+  validates :lecture, presence: true
+  validates :promotion, presence: true
+  validates :user, presence: true
+  validates :semester, presence: true
+  validates :grades, presence: true
 end
