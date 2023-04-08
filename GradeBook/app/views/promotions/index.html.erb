@@ -6,14 +6,22 @@
   <div class="flex justify-between items-center">
     <h1 class="font-bold text-4xl">Promotions</h1>
   </div>
-
+  <% if current_user.teacher? %>
+    <div class="bg-orange-100 border-l-4 border-orange-500 text-orange-700 p-4" role="alert">
+      <p class="font-bold">Create a lecture</p>
+      <ul>
+        <li>1. Create a promotion</li>
+        <li>2. Assign students to a promotion</li>
+      </ul>
+    </div>
+  <% end %>
   <div class="flex justify-between items-center">
     <%= link_to 'New promotion', new_promotion_path, class: "rounded-lg py-3 px-5 bg-blue-600 text-white block font-medium" %>
     <%= link_to 'Add student to a promotion', new_user_promotion_path, class: "rounded-lg py-3 px-5 bg-blue-600 text-white block font-medium" %>
   </div>
 
-
   <div id="promotions" class="min-w-full">
     <%= render @promotions %>
   </div>
+
 </div>
