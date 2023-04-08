@@ -58,7 +58,11 @@ rails db:seed --trace
 ```
 
 ### 5. Run project
-
+Generate the css
+```shell
+rails tailwindcss:build
+```
+Run the server
 ```shell
 bin/rails server
 ```
