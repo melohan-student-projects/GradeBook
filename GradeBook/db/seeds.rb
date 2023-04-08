@@ -150,10 +150,6 @@ teacher = User.find_by(email: "ada.lovelace@cpnv.ch")
 student = User.find_by(email: "rachel.green@cpnv.ch")
 dispensed_lecture = DispensedLecture.find_by(lecture_id: Lecture.find_by(name: "POO1").id, promotion_id: Promotion.find_by(name: "Si-T2a").id)
 
-puts teacher.full_name
-puts student.full_name
-puts dispensed_lecture.lecture.name
-
 10.times do
   Grade.create!(
     name: "TE - #{Faker::Lorem.word}",
