@@ -3,10 +3,9 @@ class LecturesController < ApplicationController
   before_action :set_lecture, only: %i[ show edit update destroy ]
   before_action :require_teacher, only: [:index, :show, :new, :edit, :create, :update, :destroy]
 
-
   # GET /lectures or /lectures.json
   def index
-    @lectures = Lecture.all
+    @lectures = current_user.lectures
   end
 
   # GET /lectures/1 or /lectures/1.json
@@ -61,15 +60,16 @@ class LecturesController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_lecture
-      @lecture = Lecture.find(params[:id])
-    end
 
-    # Only allow a list of trusted parameters through.
-    def lecture_params
-      params.require(:lecture).permit(:name, :description, :category_id)
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_lecture
+    @lecture = Lecture.find(params[:id])
+  end
+
+  # Only allow a list of trusted parameters through.
+  def lecture_params
+    params.require(:lecture).permit(:name, :description, :category_id)
+  end
 
   def require_teacher
     if not current_user.teacher?
