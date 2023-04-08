@@ -11,5 +11,4 @@ class DispensedLecture < ApplicationRecord
   validates :promotion, presence: true
   validates :user, presence: true
   validates :semester, presence: true
-  validates :grades, presence: true
 end

@@ -31,7 +31,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_04_07_141930) do
   end
 
   create_table "grades", charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
-    t.string "name", limit: 120
+    t.string "name", limit: 120, null: false
     t.decimal "result", precision: 2, scale: 1, null: false
     t.decimal "weight", precision: 3, scale: 1, null: false
     t.date "date", null: false
@@ -65,7 +65,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_04_07_141930) do
   end
 
   create_table "semesters", charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
-    t.string "name", limit: 2, null: false
+    t.string "name", limit: 60, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
