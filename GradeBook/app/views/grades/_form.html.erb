@@ -1,0 +1,53 @@
+<%= form_with(model: grade, class: "contents") do |form| %>
+  <% if grade.errors.any? %>
+    <div id="error_explanation" class="bg-red-50 text-red-500 px-3 py-2 font-medium rounded-lg mt-3">
+      <h2><%= pluralize(grade.errors.count, "error") %> prohibited this grade from being saved:</h2>
+
+      <ul>
+        <% grade.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="my-5">
+    <%= form.label :name %>
+    <%= form.text_field :name, class: "block shadow rounded-md border border-gray-200 outline-none px-3 py-2 mt-2 w-full" %>
+  </div>
+
+  <div class="my-5">
+    <%= form.label :result %>
+    <%= form.number_field :result, step: 0.1, class: "block shadow rounded-md border border-gray-200 outline-none px-3 py-2 mt-2 w-full" %>
+  </div>
+
+  <div class="my-5">
+    <%= form.label :weight %>
+    <%= form.number_field :weight, step: 0.1, class: "block shadow rounded-md border border-gray-200 outline-none px-3 py-2 mt-2 w-full" %>
+  </div>
+
+  <div>
+    <%= form.hidden_field :date, :value => Time.now %>
+  </div>
+
+  <div class="my-5">
+    <%= form.label :student_id %>
+    <%= form.select :student_id, options_for_select(User.where(user_type_id: UserType.find_by(slug: 'STU')).map { |p| [p.full_name, p.id] }), class: "form-select block shadow rounded-md border border-gray-200 outline-none px-3 py-2 mt-2 w-full" %>
+  </div>
+
+  <div class="my-5">
+    <%= form.label :teacher_id %>
+    <%= form.select :teacher_id, options_for_select(User.where(user_type_id: UserType.find_by(slug: 'TEA')).map { |p| [p.full_name, p.id] }), class: "form-select block shadow rounded-md border border-gray-200 outline-none px-3 py-2 mt-2 w-full" %>
+  </div>
+
+  <div class="my-5">
+    <%= form.label :dispensed_lecture_id %>
+    <%= form.select :dispensed_lecture_id, options_for_select(
+      DispensedLecture.where(user_id: current_user.id).map { |dl| ["#{dl.lecture.name} - #{dl.promotion.name}", dl.id] }
+    ), { include_blank: true }, class: "form-select block shadow rounded-md border border-gray-200 outline-none px-3 py-2 mt-2 w-full" %>
+  </div>
+
+  <div class="inline">
+    <%= form.submit class: "rounded-lg py-3 px-5 bg-blue-600 text-white inline-block font-medium cursor-pointer" %>
+  </div>
+<% end %>

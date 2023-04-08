@@ -1,16 +1,86 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>GradeBook</title>
-    <meta name="viewport" content="width=device-width,initial-scale=1">
-    <%= csrf_meta_tags %>
-    <%= csp_meta_tag %>
+<head>
+  <title>GradeBook</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <%= csrf_meta_tags %>
+  <%= csp_meta_tag %>
+    <%= stylesheet_link_tag "tailwind", "inter-font", "data-turbo-track": "reload" %>
+  <%= stylesheet_link_tag "tailwind", "inter-font", "data-turbo-track": "reload" %>
+    <%= stylesheet_link_tag "tailwind", "inter-font", "data-turbo-track": "reload" %>
+  <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
+  <%= javascript_importmap_tags %>
+  <%= hotwire_livereload_tags if Rails.env.development? %>
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css">
+  <%= csrf_meta_tags %>
+</head>
 
-    <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
-    <%= javascript_importmap_tags %>
-  </head>
-
-  <body>
+<body class="bg-gray-800 font-sans leading-normal tracking-normal mt-12">
+<% if user_signed_in? %>
+  <header>
+    <%= render 'layouts/navbar' %>
+  </header>
+  <main>
+    <div class="flex flex-col md:flex-row bg-white">
+      <% if user_signed_in? %>
+        <%= render 'layouts/lateral_navbar' %>
+      <% end %>
+      <section class="bg-white">
+        <div id="main" class="main-content flex-1 mt-12 md:mt-2 pb-24 md:pb-5 bg-white">
+          <div class="w-full flex flex-wrap">
+            <div class="w-full md:w-2/2 xl:w-3/3 p-6">
+              <p class="alert"><%= alert %></p>
+              <%= yield %>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+  </main>
+<% else %>
+  <main class="container mx-auto mt-10 px-5 flex">
+    <p class="alert"><%= alert %></p>
     <%= yield %>
-  </body>
+  </main>
+<% end %>
+<% if user_signed_in? %>
+  <script>
+      /*Toggle dropdown list*/
+      function toggleDD(myDropMenu) {
+          document.getElementById(myDropMenu).classList.toggle("invisible");
+      }
+
+      /*Filter dropdown options*/
+      function filterDD(myDropMenu, myDropMenuSearch) {
+          var input, filter, ul, li, a, i;
+          input = document.getElementById(myDropMenuSearch);
+          filter = input.value.toUpperCase();
+          div = document.getElementById(myDropMenu);
+          a = div.getElementsByTagName("a");
+          for (i = 0; i < a.length; i++) {
+              if (a[i].innerHTML.toUpperCase().indexOf(filter) > -1) {
+                  a[i].style.display = "";
+              } else {
+                  a[i].style.display = "none";
+              }
+          }
+      }
+
+      // Close the dropdown menu if the user clicks outside of it
+      window.onclick = function (event) {
+          if (!event.target.matches('.drop-button') && !event.target.matches('.drop-search')) {
+              var dropdowns = document.getElementsByClassName("dropdownlist");
+              for (var i = 0; i < dropdowns.length; i++) {
+                  var openDropdown = dropdowns[i];
+                  if (!openDropdown.classList.contains('invisible')) {
+                      openDropdown.classList.add('invisible');
+                  }
+              }
+          }
+      }
+  </script>
+<% end %>
+</body>
 </html>
+
+

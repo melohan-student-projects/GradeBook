@@ -72,7 +72,7 @@ bower.json
 ## Editor settings:
 # Covers JetBrains IDEs: IntelliJ, RubyMine, PhpStorm, AppCode, PyCharm
 *.iml
-.idea
+../.idea
 *.ipr
 *.iws
 
@@ -80,3 +80,5 @@ bower.json
 *.sw*
 
 config/database.yml
+/app/assets/builds/*
+!/app/assets/builds/.keep
